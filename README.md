@@ -6,5 +6,4 @@ android lottery app using python with Kivy
 # ccompatible with Python 3.xx
 # The App uses the past winning winners for lotteries to determine which numbers have the highest chance of winning.
 # As of June 15, 2015 the app uses the databases for CA SuperLotto, MegaMillions, and Powerball.
-# While the App runs flawlessly on the desktop, I haven't been able to make complilation recipes for some the modules, such as
-# Pandas, matplotlib, openpyxl, etc, the app uses as of this moment.
+# While the App runs flawlessly on the desktop, I haven't been able to make complilation recipes for some the modules, such as Pandas, matplotlib, openpyxl, etc, the app uses as of this moment.
