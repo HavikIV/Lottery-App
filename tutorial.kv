@@ -1,0 +1,158 @@
+<HomeScreen>:
+    RelativeLayout:
+    	Image:
+    		source: 'images/background3.jpg'
+    		size_hint: None, None
+    		size: self.texture_size
+    		pos: self.pos
+        Button:
+        	id: selectButton
+        	font_size: sp(30)
+            text: 'Select Lottery'
+            size_hint_x: None
+            width: self.texture_size[0]
+            size_hint_y: None
+            height: self.texture_size[1]
+            pos: root.width / 2 - (self.width / 2), root.height / 2
+            on_press: root.manager.current = 'lottery_selection'
+        Button:
+        	id: updateButton
+        	font_size: sp(30)
+            text: 'Update Databases'
+            size_hint_x: None
+            width: self.texture_size[0]
+            size_hint_y: None
+            height: self.texture_size[1]
+            pos: root.width / 2 - (self.width / 2), root.height / 2 - selectButton.height
+            on_press: app.updateDatabase()
+        Button:
+        	size_hint_x: None
+            width: self.texture_size[0]
+            size_hint_y: None
+            height: self.texture_size[1]
+            pos: root.width - self.width, 0
+            font_size: sp(30)
+            text: 'Quit'
+            on_press: app.stop()
+
+<LotterySelcetionScreen>:
+    RelativeLayout:
+    	Image:
+    		source: 'images/background3.jpg'
+    		size_hint: None, None
+    		size: self.texture_size
+        Button:
+        	id: btnSuper
+            text: 'SuperLotto'
+            size_hint_x: None
+            width: self.texture_size[0]
+            size_hint_y: None
+            height: self.texture_size[1]
+            pos: (root.width / 2) - (self.width / 2), (root.height / 2)
+            font_size: sp(50)
+            on_press: root.manager.current = 'table'
+            on_press: app.lotteryName = 'SuperLotto'
+        Button:
+        	id: btnMega
+        	text: 'MegaMillions'
+        	size_hint_x: None
+            width: self.texture_size[0]
+            size_hint_y: None
+            height: self.texture_size[1]
+            pos: (root.width / 2) - (self.width / 2), (root.height / 2) - btnSuper.height
+            font_size: sp(50)
+        	on_press: root.manager.current = 'table'
+            on_press: app.lotteryName = 'MegaMillions'
+        Button:
+        	id: btnPower
+        	text: 'Powerball'
+        	size_hint_x: None
+            width: self.texture_size[0]
+            size_hint_y: None
+            height: self.texture_size[1]
+            pos: (root.width / 2) - (self.width / 2), (root.height / 2) - btnSuper.height - btnMega.height
+            font_size: sp(50)
+        	on_press: root.manager.current = 'table'
+            on_press: app.lotteryName = 'Powerball'
+        Button:
+        	id: btnHome
+            text: 'Back to home'
+            size_hint_x: None
+            width: self.texture_size[0]
+            size_hint_y: None
+            height: self.texture_size[1]
+            font_size: sp(30)
+            on_press: root.manager.current = 'home'
+            pos: root.width - self.width, 0
+            
+<TableScreen>:
+	RelativeLayout:
+		Image:
+    		source: 'images/background3.jpg'
+    		size_hint: None, None
+    		size: self.texture_size
+    		pos: self.pos
+		Button:
+			id: homeButton
+			size_hint_x: None
+            width: self.texture_size[0]
+            size_hint_y: None
+            height: self.texture_size[1]
+            pos: root.width - self.width - quitButton.width, 0
+            font_size: sp(30)
+			text: 'Back to home'
+			on_press: root.manager.current = 'home'
+			on_press: label1.text = ''
+			on_press: label2.text = ''
+		Button:
+			id: quitButton
+			size_hint_x: None
+            width: self.texture_size[0]
+            size_hint_y: None
+            height: self.texture_size[1]
+            pos: root.width - self.width, 0
+            font_size: sp(30)
+            text: "Quit"
+            on_press: app.stop()
+		Label:
+			id:label1
+			size_hint_x: None
+            width: self.texture_size[0]
+            size_hint_y: None
+            height: self.texture_size[1]
+            font_size: sp(21)
+            pos: (root.width / 2) - (self.width / 2), root.height / 2
+            color: 1,.17,.17,1
+		Label:
+			id:label2
+			size_hint_x: None
+            width: self.texture_size[0]
+            size_hint_y: None
+            height: self.texture_size[1]
+            font_size: sp(21)
+            pos: (root.width / 2) - (self.width / 2), (root.height / 2) - label1.height
+            color: 1,.17,.17,1
+		Button:
+			id: newButton
+			text: 'New Ticket'
+			size_hint_x: None
+            width: self.texture_size[0]
+            size_hint_y: None
+            height: self.texture_size[1]
+            font_size: sp(30)
+            pos: root.width - self.width - quitButton.width - homeButton.width, 0
+            on_press: label1.text=str(app.generate_ticket(app.loadTable(app.lotteryName)))[1:-1]
+            on_press: label2.text = ""
+            on_press: label1.font_size = sp(30)
+		Button:
+			id: listButton
+			text: 'Popular Numbers'
+			size_hint_x: None
+			size_hint_y: None
+			width: self.texture_size[0]
+			height: self.texture_size[1]
+			font_size: sp(30)
+			pos: root.width - self.width - quitButton.width - homeButton.width - newButton.width, 0
+			on_press: label1.text = str(app.getPopularList(app.loadTable(app.lotteryName), 6))[1:-1]
+			on_press: label1.font_size = sp(21)
+			on_press: label2.text = str(app.getPopularList(app.loadTable(app.lotteryName), 1))[1:-1]
